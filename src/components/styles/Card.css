@@ -1,0 +1,14 @@
+.imageHead{
+    display: flex !important;
+    justify-content: center;
+}
+
+.imageHead img{
+    width: 30vw;
+    height: 30vh;
+}
+
+.contentHead{
+    text-align: center;
+    font-size: 3vh !important;
+}
