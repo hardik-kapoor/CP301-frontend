@@ -4,7 +4,7 @@ import '../styles/BookCard.css';
 const BookCard = props =>{
     return (
         <div className="column">
-            <div className="ui segment">
+            <div className="ui segment" style={{backgroundColor:''}}>
                 <div>
                     <div className="imageHead image header">
                         <img src={props.imgSource} alt={props.imgAlt}></img>
