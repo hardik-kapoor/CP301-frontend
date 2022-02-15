@@ -8,11 +8,16 @@ const BookExchange = props => {
         <>
             <SearchHeader />
             <div className="ui two column grid">
-                <div className="four wide column">
+                <div className="three wide column">
                     Hello
                 </div>
-                <div className="twelve wide column">
-                    <div className="ui three column grid" style={{paddingRight:'10px',paddingTop:'10px'}}>
+                <div className="thirteen wide column">
+                    <div className="ui four column grid" style={{paddingRight:'10px',paddingTop:'10px'}}>
+                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
+                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
+                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
+                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
+                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
                         <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
                         <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
                         <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
