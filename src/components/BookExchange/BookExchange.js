@@ -1,12 +1,25 @@
 import React from "react";
 import { connect } from 'react-redux';
+import BookCard from "./BookCard";
 import SearchHeader from "./SearchHeader";
 
 const BookExchange = props => {
     return (
         <>
             <SearchHeader />
-            <div>Hello</div>
+            <div className="ui two column grid">
+                <div className="four wide column">
+                    Hello
+                </div>
+                <div className="twelve wide column">
+                    <div className="ui three column grid" style={{paddingRight:'10px',paddingTop:'10px'}}>
+                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
+                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
+                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
+                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' header='temp'/>
+                    </div>
+                </div>
+            </div>
         </>
     );
 };

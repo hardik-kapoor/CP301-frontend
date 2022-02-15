@@ -1,7 +1,7 @@
 import React from "react";
-import './styles/Card.css';
+import '../styles/BookCard.css';
 
-const Card = props =>{
+const BookCard = props =>{
     return (
         <div className="column">
             <div className="ui segment">
@@ -18,4 +18,4 @@ const Card = props =>{
     );
 };
 
-export default Card;
+export default BookCard;

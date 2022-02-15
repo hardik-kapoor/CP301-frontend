@@ -1,0 +1,13 @@
+.imageHead{
+    display: flex !important;
+    justify-content: center;
+}
+
+.imageHead img{
+    max-width: 90%;
+}
+
+.contentHead{
+    text-align: center;
+    font-size: 3vh !important;
+}
