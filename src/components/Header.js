@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import GoogleAuth from './GoogleAuth';
+import {Link} from 'react-router-dom';
 
 const Header = () => {
     return (
         <div className='ui container'>
             <div className='ui large primary inverted menu'>
-                <a className='active item'>Home</a>
-                <a className='item'>Pages</a>
+                <Link to='/' className='active item'>Home</Link>
+                <Link to='/bookexchange' className='item'>Book Exchange</Link>
                 <div className='right item'>
                     <GoogleAuth />
                 </div>

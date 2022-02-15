@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import { complaintUrl, bookUrl, courseUrl } from "../imageUrl";
+
 const CardHolder = () =>{
     return (
       <div className="mainHead ui three column stackable grid" style={{marginTop:'5vh', paddingBottom:'50vh', marginLeft:'1vw',marginRight:'1vw'}}>
