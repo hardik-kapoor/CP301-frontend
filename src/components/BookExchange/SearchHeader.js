@@ -22,21 +22,21 @@ const SearchHeader = props => {
             <div className='ui large primary inverted menu' style={{ margin: '2px', marginTop: '0px' }}>
                 <Link to='/' className='active item'>Home</Link>
                 <div className='ui dropdown item' onClick={() => setOpenDropdown(1-openDropdown)} ref={ref}>
-                    <div className='text'>Nav</div>
+                    <div className='text'>Navigation</div>
                     <i className="dropdown icon"></i>
-                    <div className={`menu transition ${openDropdown === 1 ? 'visible' : ''}`}>
+                    <div className={`menu transition ${openDropdown ? 'visible' : ''}`}>
                         <Link to="/" className='item'>
                             Home
                         </Link>
-                        <div className='item'>
+                        <Link to='/' className='item'>
                             Complaint Portal
-                        </div>
-                        <div className='item'>
+                        </Link>
+                        <Link to='/bookexchange' className='item'>
                             Book Exchange
-                        </div>
-                        <div className='item'>
+                        </Link>
+                        <Link  to='/' className='item'>
                             Course Discussion Portal
-                        </div>
+                        </Link>
                     </div>
                 </div>
                 <div className='right item'>
