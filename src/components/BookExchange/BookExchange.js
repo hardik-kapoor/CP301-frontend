@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from 'react-redux';
-import Header from "../Header";
+import SearchHeader from "./SearchHeader";
 
 const BookExchange = props => {
     return (
         <>
-            <Header />
+            <SearchHeader />
             <div>Hello</div>
         </>
     );

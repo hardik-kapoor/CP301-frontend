@@ -7,22 +7,24 @@ import BookExchange from './BookExchange/BookExchange';
 
 const App = () => {
     return (
-        <Router>
-            <Switch>
-                <Route exact path="/">
-                    <div>
-                        <Helmet>
-                            <style>{'body {background-color:#EEEEEE}'}</style>
-                        </Helmet>
-                        <Header />
-                        <CardHolder />
-                    </div>
-                </Route>
-                <Route path="/bookexchange">
-                    <BookExchange />
-                </Route>
-            </Switch>
-        </Router>
+        <>
+            <Helmet>
+                <style>{'body {background-color:#EEEEEE}'}</style>
+            </Helmet>
+            <Router>
+                <Switch>
+                    <Route exact path="/">
+                        <div>
+                            <Header />
+                            <CardHolder />
+                        </div>
+                    </Route>
+                    <Route path="/bookexchange">
+                        <BookExchange />
+                    </Route>
+                </Switch>
+            </Router>
+        </>
     );
 };
 
