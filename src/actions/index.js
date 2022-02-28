@@ -1,19 +1,37 @@
-import { SIGN_IN, SIGN_OUT,SIGN_UP } from './types';
+import { SIGN_IN, SIGN_OUT } from './types';
 import history from '../history';
 import flask from '../apis/flask';
 
-export const signIn = userId => {
-    return {
-        type: SIGN_IN,
-        payload: userId
-    };
+export const signIn = formVal => async (dispatch) => {
+    const response = await flask.post('/login', formVal);
+    console.log(response);
+    if (!response.data.userId) {
+        if (response.data.email_id)
+            alert('Email ID does not exists!');
+        else if (response.data.password)
+            alert('Passwords do not match!');
+        else
+            alert('There is some error, please try again later.');
+        return;
+    }
+    dispatch({ type: SIGN_IN, payload: response.data.userId });
+    // history.push('/');
 };
 
-export const signUp = formVal => async(dispatch) =>{
-    const response = await flask.post('/add_user',formVal);
+export const signUp = formVal => async (dispatch) => {
+    const response = await flask.post('/add_user', formVal);
     console.log(response);
-    dispatch({type:SIGN_UP,payload:response.data});
-    //history.push('/');
+    if (!response.data.userId) {
+        if (response.data.username)
+            alert('UserName already exists!');
+        else if (response.data.email_id)
+            alert('Account exists with same Email ID, please login');
+        else
+            alert('There is some error, please try again later.');
+        return;
+    }
+    dispatch({ type: SIGN_IN, payload: response.data.userId });
+    // history.push('/');
 };
 
 export const signOut = () => {

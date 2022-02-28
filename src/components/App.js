@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import BookExchange from './BookExchange/BookExchange';
 import SignUp from './SignUp';
 import history from '../history';
+import LogIn from './LogIn';
 
 const App = () => {
     return (
@@ -26,6 +27,9 @@ const App = () => {
                     </Route>
                     <Route path='/signup'>
                         <SignUp />
+                    </Route>
+                    <Route path='/login'>
+                        <LogIn />
                     </Route>
                 </Switch>
             </Router>
