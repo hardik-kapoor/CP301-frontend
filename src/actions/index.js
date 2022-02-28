@@ -4,7 +4,6 @@ import flask from '../apis/flask';
 
 export const signIn = formVal => async (dispatch) => {
     const response = await flask.post('/login', formVal);
-    console.log(response);
     if (!response.data.userId) {
         if (response.data.email_id)
             alert('Email ID does not exists!');
@@ -15,12 +14,12 @@ export const signIn = formVal => async (dispatch) => {
         return;
     }
     dispatch({ type: SIGN_IN, payload: response.data.userId });
-    // history.push('/');
+    localStorage.setItem('user',response.data.userId);
+    history.push('/');
 };
 
 export const signUp = formVal => async (dispatch) => {
     const response = await flask.post('/add_user', formVal);
-    console.log(response);
     if (!response.data.userId) {
         if (response.data.username)
             alert('UserName already exists!');
@@ -31,10 +30,12 @@ export const signUp = formVal => async (dispatch) => {
         return;
     }
     dispatch({ type: SIGN_IN, payload: response.data.userId });
-    // history.push('/');
+    localStorage.setItem('user',response.data.userId);
+    history.push('/');
 };
 
 export const signOut = () => {
+    localStorage.clear();
     return {
         type: SIGN_OUT
     };

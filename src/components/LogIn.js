@@ -31,7 +31,6 @@ class LogIn extends React.Component {
     };
 
     onSubmit = (formValues) => {
-        console.log(formValues);
         this.props.signIn(formValues);
     };
 
