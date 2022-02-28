@@ -40,7 +40,6 @@ class GoogleAuth extends Component{
                     <i className="google icon"></i>
                     Log In with Google
                 </button>
-                <button className="ui inverted button">Sign Up</button>
             </>
         );
     };

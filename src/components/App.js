@@ -1,9 +1,11 @@
 import React from 'react';
 import CardHolder from './CardHolder';
 import Header from './Header';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import BookExchange from './BookExchange/BookExchange';
+import SignUp from './SignUp';
+import history from '../history';
 
 const App = () => {
     return (
@@ -11,7 +13,7 @@ const App = () => {
             <Helmet>
                 <style>{'body {background-color:#EEEEEE}'}</style>
             </Helmet>
-            <Router>
+            <Router history={history}>
                 <Switch>
                     <Route exact path="/">
                         <div>
@@ -21,6 +23,9 @@ const App = () => {
                     </Route>
                     <Route path="/bookexchange">
                         <BookExchange />
+                    </Route>
+                    <Route path='/signup'>
+                        <SignUp />
                     </Route>
                 </Switch>
             </Router>

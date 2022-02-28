@@ -18,7 +18,7 @@ const SearchHeader = props => {
         };
     }, []);
     return (
-        <>
+        <div className='ui container'>
             <div className='ui large primary inverted menu' style={{ margin: '2px', marginTop: '0px' }}>
                 <Link to='/' className='item'>Home</Link>
                 <div className='ui dropdown item' onClick={() => setOpenDropdown(1-openDropdown)} ref={ref}>
@@ -43,7 +43,7 @@ const SearchHeader = props => {
                     <GoogleAuth />
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

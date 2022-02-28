@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import GoogleAuth from './GoogleAuth';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -11,6 +11,7 @@ const Header = () => {
                 <Link to='/bookexchange' className='item'>Book Exchange</Link>
                 <div className='right item'>
                     <GoogleAuth />
+                    <Link to='/signup' className="ui inverted button">Sign Up</Link>
                 </div>
             </div>
         </div>
