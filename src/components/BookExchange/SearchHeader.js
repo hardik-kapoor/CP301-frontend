@@ -20,7 +20,7 @@ const SearchHeader = props => {
     return (
         <>
             <div className='ui large primary inverted menu' style={{ margin: '2px', marginTop: '0px' }}>
-                <Link to='/' className='active item'>Home</Link>
+                <Link to='/' className='item'>Home</Link>
                 <div className='ui dropdown item' onClick={() => setOpenDropdown(1-openDropdown)} ref={ref}>
                     <div className='text'>Navigation</div>
                     <i className="dropdown icon"></i>
