@@ -7,6 +7,14 @@ import Header from './Header';
 import './styles/SignUp.css';
 
 class LogIn extends React.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state={isButtonDisabled:0};
+        this.didUnmount=false;
+    }
+
+
     renderError({ error, touched }) {
         if (touched && error) {
             return (
@@ -17,6 +25,10 @@ class LogIn extends React.Component {
                 </div>
             );
         }
+    }
+
+    componentWillUnmount(){
+        this.didUnmount=true;
     }
 
     renderInput = formProps => {
@@ -30,9 +42,12 @@ class LogIn extends React.Component {
         );
     };
 
-    onSubmit = (formValues) => {
-        console.log(formValues);
-        this.props.signIn(formValues);
+    onSubmit =async (formValues) => {
+        // console.log(formValues);
+        this.setState({isButtonDisabled:1});
+        await this.props.signIn(formValues);
+        if(!this.didUnmount)
+            this.setState({isButtonDisabled:0});
     };
 
     render() {
@@ -45,7 +60,7 @@ class LogIn extends React.Component {
                         <h3 className='ui dividing header'>Basic Information</h3>
                         <Field name="email_id" type='text' label="Email ID" component={this.renderInput}></Field>
                         <Field name="password" type='password' label="Password" component={this.renderInput}></Field>
-                        <button className='ui primary button'>Submit</button>
+                        <button disabled={this.state.isButtonDisabled} className='ui primary button'>Submit</button>
                     </form>
                 </div>
             </>

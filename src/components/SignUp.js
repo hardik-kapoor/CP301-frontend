@@ -7,6 +7,17 @@ import Header from './Header';
 import './styles/SignUp.css';
 
 class SignUp extends React.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state={isButtonDisabled:0};
+        this.didUnmount=false;
+    }
+
+    componentWillUnmount(){
+        this.didUnmount=true;
+    }
+
     renderError({ error, touched }) {
         if (touched && error) {
             return (
@@ -30,9 +41,12 @@ class SignUp extends React.Component {
         );
     };
 
-    onSubmit = (formValues) => {
-        console.log(formValues);
-        this.props.signUp(formValues);
+    onSubmit =async (formValues) => {
+        // console.log(formValues);
+        this.setState({isButtonDisabled:1});
+        await this.props.signUp(formValues);
+        if(!this.didUnmount)
+            this.setState({isButtonDisabled:0});
     };
 
     render() {
@@ -47,7 +61,7 @@ class SignUp extends React.Component {
                         <Field name="email_id" type='text' label="Email ID" component={this.renderInput}></Field>
                         <Field name="password" type='password' label="Password" component={this.renderInput}></Field>
                         <Field name="re_enter_password" type='password' label="Re Enter Password" component={this.renderInput}></Field>
-                        <button className='ui primary button'>Submit</button>
+                        <button disabled={this.state.isButtonDisabled} className='ui primary button'>Submit</button>
                     </form>
                 </div>
             </>
