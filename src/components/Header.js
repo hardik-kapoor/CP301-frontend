@@ -1,30 +1,74 @@
-import React from 'react';
+import React,{ useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
-// import GoogleAuth from './GoogleAuth';
 import { Link } from 'react-router-dom';
 import SignOut from './SignOut';
 
 const Header = props => {
-
-    const renderButtons = ()=>{
-        if(props.isSignedIn)
+    const [openDropdown, setOpenDropdown] = useState(0);
+    const ref = useRef();
+    useEffect(() => {
+        const closeDropdown = event => {
+            if (ref&&ref!==null&&ref.current.contains(event.target)) {
+                return;
+            }
+            setOpenDropdown(0);
+        };
+        document.body.addEventListener('click', closeDropdown);
+        return () => {
+            document.body.removeEventListener('click', closeDropdown);
+        };
+    }, []);
+    const renderButtons = () => {
+        if (props.isSignedIn)
             return <SignOut />;
-        else
-        {
+        else {
             return (
                 <>
-                    <Link to='/signup' className="ui inverted button" style={{marginRight:'5px'}}>Sign Up</Link>
-                    <Link to='/login' className="ui inverted button" style={{marginRight:'5px'}}>Log In</Link>
+                    <Link to='/signup' className="ui inverted button" style={{ marginRight: '5px' }}>Sign Up</Link>
+                    <Link to='/login' className="ui inverted button" style={{ marginRight: '5px' }}>Log In</Link>
                 </>
             );
         }
     };
 
+    const renderHeader = () => {
+        if(props.dropdown===true){
+            return (
+            <>            
+                <div className='ui dropdown item' onClick={() => setOpenDropdown(1-openDropdown)} ref={ref}>
+                    <div className='text'>Navigation</div>
+                    <i className="dropdown icon"></i>
+                    <div className={`menu transition ${openDropdown ? 'visible' : ''}`}>
+                        <Link to="/" className='item'>
+                            Home
+                        </Link>
+                        <Link to='/' className='item'>
+                            Complaint Portal
+                        </Link>
+                        <Link to='/bookexchange' className='item'>
+                            Book Exchange
+                        </Link>
+                        <Link  to='/' className='item'>
+                            Course Discussion Portal
+                        </Link>
+                    </div>
+                </div>
+            </>);
+        }
+        else{
+            return (
+                <>
+                    <Link to='/bookexchange' className='item'>Book Exchange</Link>
+                </>
+            );
+        }
+    }
+
     return (
         <div className='ui container'>
             <div className='ui large primary inverted menu'>
                 <Link to='/' className='active item'>Home</Link>
-                <Link to='/bookexchange' className='item'>Book Exchange</Link>
+                {renderHeader()}
                 <div className='right item'>
                     {/* <GoogleAuth /> */}
                     {renderButtons()}
@@ -34,8 +78,8 @@ const Header = props => {
     );
 };
 
-const mapStateToProps = state=>{
-    return {...state.auth}
+const mapStateToProps = state => {
+    return { ...state.auth }
 };
 
 export default connect(mapStateToProps)(Header);

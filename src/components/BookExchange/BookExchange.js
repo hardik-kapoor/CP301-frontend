@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from 'react-redux';
+import Header from "../Header";
 import BookCard from "./BookCard";
-import SearchHeader from "./SearchHeader";
 
 const BookExchange = props => {
     return (
         <>
-            <SearchHeader />
+            <Header dropdown={true} />
             <div className="ui two column grid">
                 <div className="three wide column">
                     Hello
