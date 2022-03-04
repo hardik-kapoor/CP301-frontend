@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import BookExchange from './BookExchange/BookExchange';
 import Auth from './Auth';
 import history from '../history';
+import CreateBook from './BookExchange/CreateBook';
 
 const App = () => {
     return (
@@ -21,14 +22,17 @@ const App = () => {
                             <CardHolder />
                         </div>
                     </Route>
-                    <Route path="/bookexchange">
+                    <Route exact path="/bookexchange">
                         <BookExchange />
                     </Route>
-                    <Route path='/signup'>
+                    <Route exact path='/signup'>
                         <Auth type='Sign Up'/>
                     </Route>
-                    <Route path='/login'>
+                    <Route exact path='/login'>
                         <Auth type='Log In'/>
+                    </Route>
+                    <Route exact path="/bookexchange/newbook">
+                        <CreateBook />
                     </Route>
                 </Switch>
             </Router>

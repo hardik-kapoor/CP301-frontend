@@ -6,9 +6,10 @@ import SignOut from './SignOut';
 const Header = props => {
     const [openDropdown, setOpenDropdown] = useState(0);
     const ref = useRef();
+    const currentURL=window.location.pathname;
     useEffect(() => {
         const closeDropdown = event => {
-            if (ref&&ref!==null&&ref.current.contains(event.target)) {
+            if (ref&&ref.current&&ref.current!==null&&ref.current.contains(event.target)) {
                 return;
             }
             setOpenDropdown(0);
@@ -35,12 +36,13 @@ const Header = props => {
         if(props.dropdown===true){
             return (
             <>            
+                <Link to='/bookexchange' className={`${currentURL==='/bookexchange'?'active':''} item`}>Book Exchange</Link>
                 <div className='ui dropdown item' onClick={() => setOpenDropdown(1-openDropdown)} ref={ref}>
                     <div className='text'>Navigation</div>
                     <i className="dropdown icon"></i>
                     <div className={`menu transition ${openDropdown ? 'visible' : ''}`}>
-                        <Link to="/" className='item'>
-                            Home
+                        <Link to={`${currentURL}/newbook`} className='item'>
+                            Sell new Book
                         </Link>
                         <Link to='/' className='item'>
                             Complaint Portal
@@ -58,7 +60,7 @@ const Header = props => {
         else{
             return (
                 <>
-                    <Link to='/bookexchange' className='item'>Book Exchange</Link>
+                    <Link to='/bookexchange' className={`${currentURL==='/bookexchange'?'active':''} item`}>Book Exchange</Link>
                 </>
             );
         }
@@ -67,7 +69,7 @@ const Header = props => {
     return (
         <div className='ui container'>
             <div className='ui large primary inverted menu'>
-                <Link to='/' className='active item'>Home</Link>
+                <Link to='/' className={`${currentURL==='/'?'active':''} item`}>Home</Link>
                 {renderHeader()}
                 <div className='right item'>
                     {/* <GoogleAuth /> */}
