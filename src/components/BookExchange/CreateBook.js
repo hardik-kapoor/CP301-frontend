@@ -4,9 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 class CreateBook extends React.Component{
-    constructor(props){
-        super(props);
-    }
+    
 
     renderInput = formProps =>{
         return (
@@ -20,18 +18,18 @@ class CreateBook extends React.Component{
 
 
     render(){
+        const srcc='https://www.publicbooks.org/wp-content/uploads/2017/01/book-e1484158615982.jpg';
         return (
             <>
                 <Header />
                 <div className='ui two column grid'>
-                    {/* <div className='one wide column'>
-
-                    </div> */}
                     <div className='seven wide column'>
                         <div className='ui container'>
-                            <img  className="img-fluid rounded px-5 pt-5 pb-3" style={{width:'40vw',height:'70vh'}} src='https://static.scientificamerican.com/sciam/cache/file/1DDFE633-2B85-468D-B28D05ADAE7D1AD8_source.jpg?w=590&h=800&D80F3D79-4382-49FA-BE4B4D0C62A5C3ED'/>                            
-                            <button className='ui button blue' style={{marginLeft:'2.5vw'}}>Search Google for images</button>
-                            <button className='ui button blue'>Search Google for images</button>
+                            <img alt='' className="img-fluid rounded px-5 pt-5 pb-3" style={{width:'40vw',height:'70vh'}} src={srcc}/>               
+                            <div className='px-5' style={{width:'40.25vw'}}>             
+                                <button className='ui button blue'>Upload Image</button>
+                                <button className='ui button blue float-end'>Search Google for images</button>
+                            </div>
                         </div>
                     </div>
                     <div className='eight wide column p-5'>
