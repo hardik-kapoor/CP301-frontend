@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { departments } from '../../objects';
+import flask from '../../apis/flask';
 
 let howMany = 0;
 class CreateBook extends React.Component {
@@ -57,7 +58,7 @@ class CreateBook extends React.Component {
     };
 
     fileChange = e =>{
-        console.log(e.target.files[0]);
+        // console.log(e.target.files[0]);
         let reader = new FileReader();      //js api
         reader.readAsDataURL(e.target.files[0]);
         reader.onloadend = ()=>{
@@ -107,13 +108,19 @@ class CreateBook extends React.Component {
     };
 
 
-    onSubmit = formValues => {
+    onSubmit = async (formValues) => {
         if(!this.state.file){
             alert('Upload an image please!');
             return;
         }
-        console.log('submit');
-        console.log(formValues);
+        const fd=new FormData()
+        fd.append('image',this.state.file,this.state.file.name);
+        for(var key in formValues){
+            fd.append(key,formValues[key]);
+        }
+        console.log('posting');
+        const response=await flask.post('/bookcreate',fd);
+        console.log(response);
     }
 
     render() {
@@ -157,7 +164,7 @@ class CreateBook extends React.Component {
 
 const validate = formValues => {
     const errors = {};
-    console.log(formValues);
+    // console.log(formValues);
     if (!formValues.BookName)
         errors.BookName = "Please enter Book Name";
     if (!formValues.BookAuthor)
