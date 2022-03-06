@@ -24,7 +24,7 @@ class Auth extends React.Component {
         if (touched && error) {
             return (
                 <div className="ui">
-                    <div className="header red text">
+                    <div className="text-danger">
                         {error}
                     </div>
                 </div>
