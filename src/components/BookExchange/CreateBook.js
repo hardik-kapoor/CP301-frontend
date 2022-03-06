@@ -7,7 +7,7 @@ import { departments } from '../../objects';
 
 let howMany = 0;
 class CreateBook extends React.Component {
-    state = { counter: 0, elem: [] };
+    state = { counter: 0, elem: [] ,srcImage:'https://semantic-ui.com/images/wireframe/white-image.png'};
 
     bookTypeOptions = [
         { value: 'College_Course_Work', label: 'College Course Work' },
@@ -56,6 +56,18 @@ class CreateBook extends React.Component {
         );
     };
 
+    fileChange = e =>{
+        console.log(e.target.files[0]);
+        let reader = new FileReader();      //js api
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onloadend = ()=>{
+            this.setState({
+                srcImage: reader.result,
+                file:e.target.files[0]
+            });
+        }
+    };
+
     removeField = () => {
         if (this.state.counter === 0)
             return;
@@ -96,22 +108,27 @@ class CreateBook extends React.Component {
 
 
     onSubmit = formValues => {
+        if(!this.state.file){
+            alert('Upload an image please!');
+            return;
+        }
         console.log('submit');
         console.log(formValues);
     }
 
     render() {
-        const srcc = 'https://semantic-ui.com/images/wireframe/white-image.png';
+        const imgStyle={ maxWidth: '40vw', maxHeight: '70vh' , display:'block',marginLeft:'auto',marginRight:'auto'}
         return (
             <>
                 <Header />
                 <div className='ui two column grid'>
                     <div className='seven wide column'>
                         <div className='ui container'>
-                            <img alt='' className="img-fluid rounded px-5 pt-5 pb-3" style={{ width: '40vw', height: '70vh' }} src={srcc} />
+                            <img alt='' className="img-fluid rounded px-5 pt-5 pb-3" style={imgStyle} src={this.state.srcImage} />
                             <div className='px-5' style={{ width: '40.25vw' }}>
-                                <button className='ui button blue'>Upload Image</button>
-                                <button className='ui button blue float-end'>Search Google for images</button>
+                                <input className='form-control bg-blue' type='file' accept='.jpg, .png, .jpeg' onChange={this.fileChange}></input>
+                                {/* <button className='ui button blue'>Upload Image</button>
+                                <button className='ui button blue float-end'>Search Google for images</button> */}
                             </div>
                         </div>
                     </div>
