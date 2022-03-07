@@ -88,8 +88,8 @@ class CreateBook extends React.Component {
     }
 
 
-    renderRelevantCourseInput = () => {
-        console.log(this.props);
+    renderRelevantCourseInput =() => {
+        // console.log(this.props);
         howMany++;
         this.setState((prev) => {
             return {
@@ -102,9 +102,11 @@ class CreateBook extends React.Component {
                 </div>
                 ]
             }
-        }
+        },
+            ()=>{
+                this.props.change(`course_code_${this.state.counter}`, null);
+            }
         );
-        this.props.change(`course_code_${this.state.counter}`, null);
     };
 
 
