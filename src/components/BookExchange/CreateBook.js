@@ -114,10 +114,8 @@ class CreateBook extends React.Component {
             return;
         }
         const fd=new FormData()
-        fd.append('image',this.state.file,this.state.file.name);
-        for(var key in formValues){
-            fd.append(key,formValues[key]);
-        }
+        fd.append('file',this.state.file,this.state.file.name);
+        fd.append('data',JSON.stringify(formValues));
         console.log('posting');
         const response=await flask.post('/bookcreate',fd);
         console.log(response);
