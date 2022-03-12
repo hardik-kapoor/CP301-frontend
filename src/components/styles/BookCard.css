@@ -1,4 +1,4 @@
-.imageHead{
+/* .imageHead{
     display: flex !important;
     justify-content: center;
 }
@@ -11,4 +11,35 @@
 .contentHead{
     text-align: center;
     font-size: 3vh !important;
+} */
+
+.bookcard {
+    display: flex;
+    padding: 10px 0px 0px 0px;
+    border-bottom: 1px solid rgb(160, 160, 160);
+}
+
+.bookcard > img {
+    width: 25%;
+    height: fit-content;
+    border-radius: 5px;
+}
+
+.bookcard-details {
+    padding-left: 10px;
+}
+
+.bookcard-details > h1 {
+    font-size: 27px;
+    text-transform: capitalize;
+}
+
+.bookcard-details > h2 {
+    font-size: 15px;
+    color: rgb(90, 90, 90)
+}
+
+.bookcard-details span {
+    font-size: 20px;
+    color:rgb(0, 140, 255);
 }
