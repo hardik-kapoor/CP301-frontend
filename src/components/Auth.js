@@ -1,12 +1,13 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { signUp, signIn } from '../actions';
-import { ValidateEmail } from '../helperFunctions/SignUp';
 import Header from './Header';
-import './styles/SignUp.css';
 import { withRouter } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signUp, signIn } from '../actions';
+// import Swal from 'sweetalert2';
+import { ValidateEmail } from '../helperFunctions/SignUp';
+import './styles/SignUp.css';
 
 let type = "";
 
@@ -16,6 +17,16 @@ class Auth extends React.Component {
         this.state = { isButtonDisabled: 0, redirect: false };
         this.didUnmount = false;
         type = this.props.type;
+    }
+
+    componentDidMount(){
+        if(!this.props.location.state)
+            return;
+        // await Swal.fire({
+        //         text: 'You need to login to Access this page',
+        //         icon: 'error',
+        // });
+        alert('You need to login to Access this page');
     }
 
     componentWillUnmount() {
@@ -78,11 +89,10 @@ class Auth extends React.Component {
         }
     };
 
+
     render() {
-        console.log(this.props.location.state);
         if (this.state.redirect)
             return <Redirect to={this.props.location.state?.from || '/'} />;
-        console.log(this.props);
         return (
             <>
                 <Header />
