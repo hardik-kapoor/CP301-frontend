@@ -16,7 +16,6 @@ export const signIn = formVal => async (dispatch) => {
     }
     localStorage.setItem('user',response.data.userId);
     dispatch({ type: SIGN_IN, payload: response.data.userId });
-    history.push('/');
 };
 
 export const signUp = formVal => async (dispatch) => {
@@ -33,11 +32,11 @@ export const signUp = formVal => async (dispatch) => {
     }
     localStorage.setItem('user',response.data.userId);
     dispatch({ type: SIGN_IN, payload: response.data.userId });
-    history.push('/');
 };
 
 export const signOut = () => {
     localStorage.clear();
+    history.push('/');
     return {
         type: SIGN_OUT
     };

@@ -5,15 +5,17 @@ import { signUp, signIn } from '../actions';
 import { ValidateEmail } from '../helperFunctions/SignUp';
 import Header from './Header';
 import './styles/SignUp.css';
+import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
-let type="";
+let type = "";
 
 class Auth extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isButtonDisabled: 0 };
+        this.state = { isButtonDisabled: 0, redirect: false };
         this.didUnmount = false;
-        type=this.props.type;
+        type = this.props.type;
     }
 
     componentWillUnmount() {
@@ -44,12 +46,13 @@ class Auth extends React.Component {
     };
 
     onSubmit = async (formValues) => {
-        // console.log(formValues);
         this.setState({ isButtonDisabled: 1 });
-        if(this.props.type==='Log In')
+        if (this.props.type === 'Log In')
             await this.props.signIn(formValues);
         else
             await this.props.signUp(formValues);
+        if (this.props.isSignedIn === true)
+            this.setState({ redirect: true });
         if (!this.didUnmount)
             this.setState({ isButtonDisabled: 0 });
     };
@@ -76,6 +79,10 @@ class Auth extends React.Component {
     };
 
     render() {
+        console.log(this.props.location.state);
+        if (this.state.redirect)
+            return <Redirect to={this.props.location.state?.from || '/'} />;
+        console.log(this.props);
         return (
             <>
                 <Header />
@@ -120,4 +127,8 @@ const formWrapped = reduxForm({
     validate
 })(Auth);
 
-export default connect(null, { signUp, signIn })(formWrapped);
+const mapStateToProps = (state) => {
+    return { isSignedIn: state.auth.isSignedIn };
+};
+
+export default connect(mapStateToProps, { signUp, signIn })(withRouter(formWrapped));

@@ -117,6 +117,7 @@ class CreateBook extends React.Component {
         }
         const fd=new FormData()
         fd.append('file',this.state.file,this.state.file.name);
+        formValues={...formValues,userId:this.props.userId,numCourses:howMany};
         fd.append('data',JSON.stringify(formValues));
         console.log('posting');
         const response=await flask.post('/bookcreate',fd);
@@ -124,6 +125,7 @@ class CreateBook extends React.Component {
     }
 
     render() {
+        // console.log(this.props);
         const imgStyle={ maxWidth: '40vw', maxHeight: '70vh' , display:'block',marginLeft:'auto',marginRight:'auto'}
         return (
             <>
@@ -171,6 +173,10 @@ const validate = formValues => {
         errors.BookAuthor = "Please enter Book Author";
     if (!formValues.BookType)
         errors.BookType = "Please enter Book Type";
+    if(!formValues.Description)
+        errors.Description="Please enter Description of the book"
+    if(!formValues.Cost)
+        errors.Cost="Please enter cost (0 if you are just lending)"
     for (let i = 1; i <= howMany; i++) {
         if (!formValues[`course_code_${i}`])
             errors[`course_code_${i}`] = "Please enter course code";
@@ -191,4 +197,8 @@ const wrapped = reduxForm({
 })(CreateBook);
 
 
-export default connect(null)(wrapped);
+const mapStateToProps = state =>{
+    return {userId:state.auth.userId};
+};
+
+export default connect(mapStateToProps)(wrapped);
