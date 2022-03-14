@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { connect } from 'react-redux';
-import Header from "../Header";
-import BookCard from "./BookCard";
 import { withRouter } from 'react-router-dom';
+import Header from "../Header";
+import LoadingScreen from 'react-loading-screen';
+import BookCard from "./BookCard";
 import flask from "../../apis/flask";
 
-class BookExchange extends React.Component{
-    state={books:[]};
+class BookExchange extends React.Component {
+    state = { books: [], showLoadingScreen:true};
     // const [books, setBooks] = useState([]);
-    componentDidMount(){
+    componentDidMount() {
         const getFromFlask = async () => {
             const response = await flask.get(this.props.location.pathname);
-            this.setState({books:response.data});
+            this.setState({ books: response.data ,showLoadingScreen:false});
         }
         getFromFlask();
     }
 
-    renderBooks = () => {
-        console.log("hello");
-        
-    };
-
     render() {
+        if(this.state.showLoadingScreen)
+        {
+            return (
+                <>
+                    <LoadingScreen loading={true} bgColor='#f1f1f1' spinnerColor='#9ee5f8' textColor='#676767'
+                                text='Loading...'>
+                    </LoadingScreen> 
+                </>
+            );
+        }
         return (
             <>
                 <Header dropdown={true} />
@@ -33,8 +39,9 @@ class BookExchange extends React.Component{
                         <div className="ui four column grid" style={{ paddingRight: '10px', paddingTop: '10px' }}>
                             {this.state.books.map(book => {
                                 console.log(book);
-                                return (<BookCard imgSource={book.image_link} bookTitle={book.book_name} 
-                                        authorName={book.book_author} description={book.description} cost={book.book_cost} key={book.book_id}/>);})}
+                                return (<BookCard imgSource={book.image_link} bookTitle={book.book_name}
+                                    authorName={book.book_author} description={book.description} cost={book.book_cost} key={book.book_id} />);
+                            })}
                         </div>
                     </div>
                 </div>
