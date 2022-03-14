@@ -44,14 +44,11 @@ const Header = props => {
                         <Link to={`${currentURL}/newbook`} className='item'>
                             Sell new Book
                         </Link>
-                        <Link to='/' className='item'>
-                            Complaint Portal
+                        <Link to={`${currentURL}/orders`} className='item'>
+                            Books Ordered by Me
                         </Link>
-                        <Link to='/bookexchange' className='item'>
-                            Book Exchange
-                        </Link>
-                        <Link  to='/' className='item'>
-                            Course Discussion Portal
+                        <Link to={`${currentURL}/tolend`} className='item'>
+                            Books To Lend
                         </Link>
                     </div>
                 </div>

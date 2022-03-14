@@ -9,6 +9,7 @@ import history from '../history';
 import CreateBook from './BookExchange/CreateBook';
 import PrivateRoute from './PrivateRoute';
 import BookDetails from './BookExchange/BookDetails';
+import Orders from './BookExchange/Orders';
 
 const App = () => {
     return (
@@ -28,10 +29,10 @@ const App = () => {
                         <CreateBook />
                     </PrivateRoute>
                     <PrivateRoute exact path="/bookexchange/orders">
-                        <Orders give={true}/>
+                        <Orders give={true} />
                     </PrivateRoute>
                     <PrivateRoute exact path="/bookexchange/tolend">
-                        <Orders give={false}/>
+                        <Orders give={false} />
                     </PrivateRoute>
                     <Route exact path="/bookexchange">
                         <BookExchange />
