@@ -1,32 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from 'react-redux';
 import Header from "../Header";
 import BookCard from "./BookCard";
+import { withRouter } from 'react-router-dom';
+import flask from "../../apis/flask";
 
-const BookExchange = props => {
-    return (
-        <>
-            <Header dropdown={true} />
-            <div className="ui two column grid" style={{margin: '0px'}}>
-                <div className="three wide column">
-                    Hello
-                </div>
-                <div className="thirteen wide column">
-                    <div className="ui four column grid" style={{paddingRight:'10px',paddingTop:'10px'}}>
-                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' bookTitle='temp' authorName='Lorem Ipsum' dateSubmitted='07 Jan 2022'/>
-                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' bookTitle='temp' authorName='Lorem Ipsum' dateSubmitted='07 Jan 2022'/>
-                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' bookTitle='temp' authorName='Lorem Ipsum' dateSubmitted='07 Jan 2022'/>
-                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' bookTitle='temp' authorName='Lorem Ipsum' dateSubmitted='07 Jan 2022'/>
-                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' bookTitle='temp' authorName='Lorem Ipsum' dateSubmitted='07 Jan 2022'/>
-                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' bookTitle='temp' authorName='Lorem Ipsum' dateSubmitted='07 Jan 2022'/>
-                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' bookTitle='temp' authorName='Lorem Ipsum' dateSubmitted='07 Jan 2022'/>
-                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' bookTitle='temp' authorName='Lorem Ipsum' dateSubmitted='07 Jan 2022'/>
-                        <BookCard imgSource='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' bookTitle='temp' authorName='Lorem Ipsum' dateSubmitted='07 Jan 2022'/>
+class BookExchange extends React.Component{
+    state={books:[]};
+    // const [books, setBooks] = useState([]);
+    componentDidMount(){
+        const getFromFlask = async () => {
+            const response = await flask.get(this.props.location.pathname);
+            this.setState({books:response.data});
+        }
+        getFromFlask();
+    }
+
+    renderBooks = () => {
+        console.log("hello");
+        
+    };
+
+    render() {
+        return (
+            <>
+                <Header dropdown={true} />
+                <div className="ui two column grid" style={{ margin: '0px' }}>
+                    <div className="three wide column">
+                        Hello
+                    </div>
+                    <div className="thirteen wide column">
+                        <div className="ui four column grid" style={{ paddingRight: '10px', paddingTop: '10px' }}>
+                            {this.state.books.map(book => {
+                                console.log(book);
+                                return (<BookCard imgSource={book.image_link} bookTitle={book.book_name} 
+                                        authorName={book.book_author} description={book.description} cost={book.book_cost} key={book.book_id}/>);})}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </>
-    );
+            </>
+        );
+    }
 };
 
-export default connect(null)(BookExchange);
+export default connect(null)(withRouter(BookExchange));
+
+// book_cost: "0"
+// book_id: 6
+// book_name: "Discrete Maths"
+// book_type: "College_Course_Work"
+// description: "good for discrete maths"
+// image_link: "https://cp301storage.blob.core.windows.net/bookphotos/book_37_6.jpg"
+// related_courses: [{…}]
+// user_id: 37

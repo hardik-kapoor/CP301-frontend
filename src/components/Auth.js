@@ -91,6 +91,7 @@ class Auth extends React.Component {
 
 
     render() {
+        console.log(this.props);
         if (this.state.redirect)
             return <Redirect to={this.props.location.state?.from || '/'} />;
         return (
