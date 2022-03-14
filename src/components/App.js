@@ -27,6 +27,12 @@ const App = () => {
                     <PrivateRoute exact path="/bookexchange/newbook">
                         <CreateBook />
                     </PrivateRoute>
+                    <PrivateRoute exact path="/bookexchange/orders">
+                        <Orders give={true}/>
+                    </PrivateRoute>
+                    <PrivateRoute exact path="/bookexchange/tolend">
+                        <Orders give={false}/>
+                    </PrivateRoute>
                     <Route exact path="/bookexchange">
                         <BookExchange />
                     </Route>

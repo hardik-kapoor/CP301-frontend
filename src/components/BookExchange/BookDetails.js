@@ -18,7 +18,7 @@ const BookDetails = props => {
     const imgStyle={ maxWidth: '40vw', maxHeight: '70vh' , display:'block',marginLeft:'auto',marginRight:'auto'}
 
     return (<>
-            <Header />
+            <Header dropdown={true}/>
             <div className="ui two column grid">
                     <div className='six wide column'>
                         <div className='ui container'>
@@ -26,7 +26,9 @@ const BookDetails = props => {
                         </div>
                     </div>
                     <div className="eight wide column">
-                        
+                        <div className="ui header">
+                            
+                        </div>
                     </div>
             </div>
         </>);

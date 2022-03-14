@@ -8,7 +8,6 @@ import flask from "../../apis/flask";
 
 class BookExchange extends React.Component {
     state = { books: [], showLoadingScreen: true };
-    // const [books, setBooks] = useState([]);
     componentDidMount() {
         const getFromFlask = async () => {
             const response = await flask.get(this.props.location.pathname);
@@ -36,19 +35,18 @@ class BookExchange extends React.Component {
                         Hello
                     </div>
                     <div className="thirteen wide column">
-                        {/* <div className="ui four column grid" style={{ paddingRight: '10px', paddingTop: '10px' }}> */}
-                            {this.state.books.map(book => {
-                                return (
-                                    <Link to={`/bookexchange/${book.book_id}`} style={{ textDecoration: 'none' }} key={book.book_id}>
-                                        <BookCard imgSource={book.image_link}
-                                            bookTitle={book.book_name}
-                                            authorName={book.book_author}
-                                            description={book.description}
-                                            cost={book.book_cost}
-                                            key={book.book_id} />
-                                    </Link>);
-                            })}
-                        {/* </div> */}
+                        {this.state.books.map(book => {
+                            const showButtons = (this.props.userId === book.user_id) ? true : false;
+                            return (    <BookCard imgSource={book.image_link}
+                                        bookTitle={book.book_name}
+                                        authorName={book.book_author}
+                                        description={book.description}
+                                        id={book.book_id}
+                                        cost={book.book_cost}
+                                        key={book.book_id}
+                                        showButton={showButtons} 
+                                        />);
+                        })}
                     </div>
                 </div>
             </>
@@ -56,7 +54,11 @@ class BookExchange extends React.Component {
     }
 };
 
-export default connect(null)(withRouter(BookExchange));
+const mapStateToProps = state => {
+    return { userId: state.auth.userId };
+};
+
+export default connect(mapStateToProps)(withRouter(BookExchange));
 
 // book_cost: "0"
 // book_id: 6
