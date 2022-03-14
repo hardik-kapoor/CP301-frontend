@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Header from "../Header";
 import LoadingScreen from 'react-loading-screen';
 import BookCard from "./BookCard";
 import flask from "../../apis/flask";
 
 class BookExchange extends React.Component {
-    state = { books: [], showLoadingScreen:true};
+    state = { books: [], showLoadingScreen: true };
     // const [books, setBooks] = useState([]);
     componentDidMount() {
         const getFromFlask = async () => {
             const response = await flask.get(this.props.location.pathname);
-            this.setState({ books: response.data ,showLoadingScreen:false});
+            this.setState({ books: response.data, showLoadingScreen: false });
         }
         getFromFlask();
     }
 
     render() {
-        if(this.state.showLoadingScreen)
-        {
+        if (this.state.showLoadingScreen) {
             return (
                 <>
                     <LoadingScreen loading={true} bgColor='#f1f1f1' spinnerColor='#9ee5f8' textColor='#676767'
-                                text='Loading...'>
-                    </LoadingScreen> 
+                        text='Loading...'>
+                        <></>
+                    </LoadingScreen>
                 </>
             );
         }
@@ -36,13 +36,19 @@ class BookExchange extends React.Component {
                         Hello
                     </div>
                     <div className="thirteen wide column">
-                        <div className="ui four column grid" style={{ paddingRight: '10px', paddingTop: '10px' }}>
+                        {/* <div className="ui four column grid" style={{ paddingRight: '10px', paddingTop: '10px' }}> */}
                             {this.state.books.map(book => {
-                                console.log(book);
-                                return (<BookCard imgSource={book.image_link} bookTitle={book.book_name}
-                                    authorName={book.book_author} description={book.description} cost={book.book_cost} key={book.book_id} />);
+                                return (
+                                    <Link to={`/bookexchange/${book.book_id}`} style={{ textDecoration: 'none' }} key={book.book_id}>
+                                        <BookCard imgSource={book.image_link}
+                                            bookTitle={book.book_name}
+                                            authorName={book.book_author}
+                                            description={book.description}
+                                            cost={book.book_cost}
+                                            key={book.book_id} />
+                                    </Link>);
                             })}
-                        </div>
+                        {/* </div> */}
                     </div>
                 </div>
             </>

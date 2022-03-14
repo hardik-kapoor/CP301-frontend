@@ -8,6 +8,7 @@ import Auth from './Auth';
 import history from '../history';
 import CreateBook from './BookExchange/CreateBook';
 import PrivateRoute from './PrivateRoute';
+import BookDetails from './BookExchange/BookDetails';
 
 const App = () => {
     return (
@@ -23,8 +24,14 @@ const App = () => {
                             <CardHolder />
                         </div>
                     </Route>
+                    <PrivateRoute exact path="/bookexchange/newbook">
+                        <CreateBook />
+                    </PrivateRoute>
                     <Route exact path="/bookexchange">
                         <BookExchange />
+                    </Route>
+                    <Route exact path="/bookexchange/:id">
+                        <BookDetails />
                     </Route>
                     <Route exact path='/signup'>
                         <Auth type='Sign Up' />
@@ -32,9 +39,6 @@ const App = () => {
                     <Route exact path='/login'>
                         <Auth type='Log In' />
                     </Route>
-                    <PrivateRoute exact path="/bookexchange/newbook">
-                        <CreateBook />
-                    </PrivateRoute>
                 </Switch>
             </Router>
         </>
