@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import BookRender from './BookRender';
 import LoadingScreen from 'react-loading-screen';
 
-const Orders = props => {
+const Lend = props => {
     const [books, setBooks] = useState([]);
     const [showLoading, setShowLoading] = useState(true);
 
     useEffect(() => {
         const getFromFlask = async () => {
-            const response = await flask.get('/orders', {
+            const response = await flask.get('/lenders', {
                 params: {
                     user: props.userId
                 }
@@ -46,10 +46,10 @@ const Orders = props => {
             {render()}
         </>
     );
-}
+};
 
 const mapStateToProps = state => {
     return { userId: state.auth.userId };
 };
 
-export default connect(mapStateToProps)(Orders);
+export default connect(mapStateToProps)(Lend);

@@ -41,13 +41,13 @@ const Header = props => {
                     <div className='text'>Navigation</div>
                     <i className="dropdown icon"></i>
                     <div className={`menu transition ${openDropdown ? 'visible' : ''}`}>
-                        <Link to={`${currentURL}/newbook`} className='item'>
+                        <Link to={`/bookexchange/newbook`} className='item'>
                             Sell new Book
                         </Link>
-                        <Link to={`${currentURL}/orders`} className='item'>
+                        <Link to={`/bookexchange/orders`} className='item'>
                             Books Ordered by Me
                         </Link>
-                        <Link to={`${currentURL}/tolend`} className='item'>
+                        <Link to={`/bookexchange/tolend`} className='item'>
                             Books To Lend
                         </Link>
                     </div>
