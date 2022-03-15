@@ -31,22 +31,27 @@ class BookExchange extends React.Component {
             <>
                 <Header dropdown={true} />
                 <div className="ui two column grid" style={{ margin: '0px' }}>
-                    <div className="three wide column">
+                    <div className="two wide column">
                         Hello
                     </div>
                     <div className="thirteen wide column">
-                        {this.state.books.map(book => {
-                            const showButtons = (this.props.userId === book.user_id) ? true : false;
-                            return (    <BookCard imgSource={book.image_link}
-                                        bookTitle={book.book_name}
-                                        authorName={book.book_author}
-                                        description={book.description}
-                                        id={book.book_id}
-                                        cost={book.book_cost}
-                                        key={book.book_id}
-                                        showButton={showButtons} 
-                                        />);
-                        })}
+                        <div className="row">
+                            {this.state.books.map(book => {
+                                const showButtons = (this.props.userId === book.user_id) ? true : false;
+                                return (
+                                    <div className="col-sm-6" key={book.book_id}>
+                                        <BookCard imgSource={book.image_link}
+                                            bookTitle={book.book_name}
+                                            authorName={book.book_author}
+                                            description={book.description}
+                                            id={book.book_id}
+                                            cost={book.book_cost}
+                                            showButton={showButtons}
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
             </>

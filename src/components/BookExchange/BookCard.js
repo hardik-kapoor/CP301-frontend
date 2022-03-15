@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import '../styles/BookCard.css';
 
 const BookCard = props => {
-    const cost = props.cost == 0 ? "Free" : "Rs. " + toString(props.cost);
-    const imgStyle = { maxWidth: '10vw', maxHeight: '70vh' }
+    const cost = props.cost == 0 ? "Free" : "Rs. " + props.cost;
+    const imgStyle = { maxWidth: '10vw' , maxHeight: '50vh'}
+    const len = props.description.length < 100 ? props.description.length : 100;
+    const flag = props.description.length < 100 ? false : true;
+    let description = props.description.slice(0, len);
+    if (flag)
+        description = description + "...";
 
     const renderButtons = () => {
         if (props.showButton)
@@ -25,16 +30,28 @@ const BookCard = props => {
         //         </div>
         //     </div>
         // </div>
-        <div className='bookcard'>
-            <img src={props.imgSource} alt={props.imgAlt} style={imgStyle} className="p-2" />
-            <div className='bookcard-details'>
-                <Link to={`/bookexchange/${props.id}`} style={{ textDecoration: 'none' }} ><h1>{props.bookTitle}</h1></Link>
-                <h2>by <span style={{ color: 'black !important' }}>{props.authorName}</span> | {cost}</h2>
-                <p style={{ color: 'black !important' }}>{props.description}</p>
-                <button className="btn btn-primary align-self-end btn-block mr-2" style={{ marginTop: 'auto' }}>Get</button>
-                {renderButtons()}
+        <div className="card">
+            <div className="card-body d-inline-flex">
+                <img src={props.imgSource} alt={props.imgAlt} style={imgStyle} className="p-2 card-img-top" />
+                <div className='bookcard-details'>
+                    <Link to={`/bookexchange/${props.id}`} style={{ textDecoration: 'none' }} ><h2>{props.bookTitle}</h2></Link>
+                    <h5>by <span style={{ color: 'black !important' }}>{props.authorName}</span> | {cost}</h5>
+                    <p style={{ color: 'black !important' }}>{description}</p>
+                    <button className="btn btn-primary align-self-end btn-block" style={{ marginTop: 'auto' , marginRight:'10px'}}>Get</button>
+                    {renderButtons()}
+                </div>
             </div>
         </div>
+        // <div className='bookcard'>
+        //     <img src={props.imgSource} alt={props.imgAlt} style={imgStyle} className="p-2" />
+        //     <div className='bookcard-details'>
+        //         <Link to={`/bookexchange/${props.id}`} style={{ textDecoration: 'none' }} ><h1>{props.bookTitle}</h1></Link>
+        //         <h2>by <span style={{ color: 'black !important' }}>{props.authorName}</span> | {cost}</h2>
+        //         <p style={{ color: 'black !important' }}>{props.description}</p>
+        //         <button className="btn btn-primary align-self-end btn-block mx-2" style={{ marginTop: 'auto' }}>Get</button>
+        //         {renderButtons()}
+        //     </div>
+        // </div>
     );
 };
 
