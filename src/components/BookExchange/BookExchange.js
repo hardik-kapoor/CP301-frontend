@@ -50,6 +50,7 @@ class BookExchange extends React.Component {
                                             description={book.description}
                                             id={book.book_id}
                                             cost={book.book_cost}
+                                            userId={this.props.userId}
                                             rerender={this.rerender}
                                             showButton={showButtons}
                                         />

@@ -14,19 +14,28 @@ const BookCard = props => {
 
     const renderButtons = () => {
         if (props.showButton)
-            return (<button className="btn btn-danger align-self-end btn-block" style={{ marginTop: 'auto' }} onClick={() => removeBook(props.id)}>Remove</button>);
-        return null;
+            return (<button className="btn btn-danger align-self-end btn-block" style={{ width: '5vw', marginTop: 'auto' }} onClick={() => removeBook(props.id)}>Remove</button>);
+        return (<button className="btn btn-primary align-self-end btn-block" style={{ width: '5vw', marginRight: '10px' }} onClick={() => getBook(props.id)}>Get</button>);
     };
 
-    const getBook = id =>{
-        
+    const getBook = async id => {
+        const ans = window.confirm("Are you sure you want to add this book?");
+        if (ans) {
+            const response = await flask.post('/getbook', {}, {
+                params: {
+                    user: props.userId,
+                    book: props.id
+                }
+            });
+            console.log(response);
+        }
     };
 
-    const removeBook = async id =>{
+    const removeBook = async id => {
         // console.log('hello');
-        const ans=window.confirm("Are you sure you want to delete?");
-        if(ans){
-            const response=await flask.delete(`/bookdelete/${id}`)
+        const ans = window.confirm("Are you sure you want to delete?");
+        if (ans) {
+            const response = await flask.delete(`/bookdelete/${id}`)
             props.rerender();
             console.log(response);
         }
@@ -52,7 +61,6 @@ const BookCard = props => {
                     <Link to={`/bookexchange/${props.id}`} style={{ textDecoration: 'none' }} ><h2>{props.bookTitle}</h2></Link>
                     <h5>by <span style={{ color: 'black !important' }}>{props.authorName}</span> | {cost}</h5>
                     <p style={{ color: 'black !important' }}>{description}</p>
-                    <button className="btn btn-primary align-self-end btn-block" style={{ marginTop: 'auto', marginRight: '10px' }} onClick={() => getBook(props.id)}>Get</button>
                     {renderButtons()}
                 </div>
             </div>
