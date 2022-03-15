@@ -15,7 +15,12 @@ const BookCard = props => {
     const renderButtons = () => {
         if (props.showButton)
             return (<button className="btn btn-danger align-self-end btn-block" style={{ width: '5vw', marginTop: 'auto' }} onClick={() => removeBook(props.id)}>Remove</button>);
-        return (<button className="btn btn-primary align-self-end btn-block" style={{ width: '5vw', marginRight: '10px' }} onClick={() => getBook(props.id)}>Get</button>);
+        else{
+            if(props.showButton2)
+                return (<button className="btn btn-primary align-self-end btn-block" style={{ width: '5vw', marginRight: '10px' }} onClick={() => getBook(props.id)}>Get</button>);
+            else
+                return null;
+        }
     };
 
     const getBook = async id => {
