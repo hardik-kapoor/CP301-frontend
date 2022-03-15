@@ -24,7 +24,8 @@ const BookCard = props => {
 
     const removeBook = async id =>{
         // console.log('hello');
-        if(window.confirm("Are you sure you want to delete?")){
+        const ans=window.confirm("Are you sure you want to delete?");
+        if(ans){
             const response=await flask.delete(`/bookdelete/${id}`)
             props.rerender();
             console.log(response);
