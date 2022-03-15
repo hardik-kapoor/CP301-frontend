@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Header from "../Header";
 import LoadingScreen from 'react-loading-screen';
-import BookCard from "./BookCard";
 import flask from "../../apis/flask";
+import BookRender from "./BookRender";
 
 class BookExchange extends React.Component {
     state = { books: [], showLoadingScreen: true, temp: Math.random() };
@@ -39,25 +39,7 @@ class BookExchange extends React.Component {
                         Hello
                     </div>
                     <div className="thirteen wide column">
-                        <div className="row">
-                            {this.state.books.map(book => {
-                                const showButtons = (this.props.userId === book.user_id) ? true : false;
-                                return (
-                                    <div className="col-sm-6" key={book.book_id}>
-                                        <BookCard imgSource={book.image_link}
-                                            bookTitle={book.book_name}
-                                            authorName={book.book_author}
-                                            description={book.description}
-                                            id={book.book_id}
-                                            cost={book.book_cost}
-                                            userId={this.props.userId}
-                                            rerender={this.rerender}
-                                            showButton={showButtons}
-                                        />
-                                    </div>
-                                );
-                            })}
-                        </div>
+                        <BookRender books={this.state.books} userId={this.props.userId} rerender={this.rerender} showButton2={true}/>
                     </div>
                 </div>
             </>
