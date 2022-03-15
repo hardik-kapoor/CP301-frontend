@@ -7,13 +7,17 @@ import BookCard from "./BookCard";
 import flask from "../../apis/flask";
 
 class BookExchange extends React.Component {
-    state = { books: [], showLoadingScreen: true };
+    state = { books: [], showLoadingScreen: true, temp: Math.random() };
     componentDidMount() {
         const getFromFlask = async () => {
             const response = await flask.get(this.props.location.pathname);
             this.setState({ books: response.data, showLoadingScreen: false });
         }
         getFromFlask();
+    }
+
+    rerender = () => {
+        window.location.reload(true);
     }
 
     render() {
@@ -31,7 +35,7 @@ class BookExchange extends React.Component {
             <>
                 <Header dropdown={true} />
                 <div className="ui two column grid" style={{ margin: '0px' }}>
-                    <div className="two wide column">
+                    <div className="three wide column">
                         Hello
                     </div>
                     <div className="thirteen wide column">
@@ -46,6 +50,7 @@ class BookExchange extends React.Component {
                                             description={book.description}
                                             id={book.book_id}
                                             cost={book.book_cost}
+                                            rerender={this.rerender}
                                             showButton={showButtons}
                                         />
                                     </div>

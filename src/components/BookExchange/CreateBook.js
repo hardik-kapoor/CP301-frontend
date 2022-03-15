@@ -121,6 +121,10 @@ class CreateBook extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        this.didUnmount = true;
+    }
+
 
     onSubmit = async (formValues) => {
         if (!this.state.file) {
