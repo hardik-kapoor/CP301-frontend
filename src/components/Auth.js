@@ -68,6 +68,12 @@ class Auth extends React.Component {
             this.setState({ isButtonDisabled: 0 });
     };
 
+    onKeyPress = (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault(); //<===== This stops the form from being submitted
+        }
+      }
+
     renderFields = () => {
         if (this.props.type === 'Log In') {
             return (
@@ -99,7 +105,7 @@ class Auth extends React.Component {
                 <Header />
                 <div className='center'>
                     <h2 style={{ textAlign: 'center' }}>{this.props.type}</h2>
-                    <form className='ui form error' onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                    <form className='ui form error' onSubmit={this.props.handleSubmit(this.onSubmit)} onKeyPress={this.onKeyPress}>
                         <h3 className='ui dividing header'>Basic Information</h3>
                         {this.renderFields()}
                         <button disabled={this.state.isButtonDisabled} className='ui primary button'>Submit</button>

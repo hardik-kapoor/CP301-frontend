@@ -5,10 +5,16 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 import { departments } from '../../objects';
 import flask from '../../apis/flask';
+import history from '../../history';
 
 let howMany = 0;
 class CreateBook extends React.Component {
-    state = { counter: 0, elem: [] ,srcImage:'https://semantic-ui.com/images/wireframe/white-image.png'};
+    state = { counter: 0, elem: [], srcImage: 'https://semantic-ui.com/images/wireframe/white-image.png' };
+
+    constructor(props) {
+        super(props);
+        this.didUnmount = false;
+    }
 
     bookTypeOptions = [
         { value: 'College_Course_Work', label: 'College Course Work' },
@@ -57,14 +63,14 @@ class CreateBook extends React.Component {
         );
     };
 
-    fileChange = e =>{
+    fileChange = e => {
         // console.log(e.target.files[0]);
         let reader = new FileReader();      //js api
         reader.readAsDataURL(e.target.files[0]);
-        reader.onloadend = ()=>{
+        reader.onloadend = () => {
             this.setState({
                 srcImage: reader.result,
-                file:e.target.files[0]
+                file: e.target.files[0]
             });
         }
     };
@@ -88,7 +94,7 @@ class CreateBook extends React.Component {
     }
 
 
-    renderRelevantCourseInput =() => {
+    renderRelevantCourseInput = () => {
         // console.log(this.props);
         howMany++;
         this.setState((prev) => {
@@ -103,30 +109,40 @@ class CreateBook extends React.Component {
                 ]
             }
         },
-            ()=>{
+            () => {
                 this.props.change(`course_code_${this.state.counter}`, null);
             }
         );
     };
 
+    onKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); //<===== This stops the form from being submitted
+        }
+    }
+
 
     onSubmit = async (formValues) => {
-        if(!this.state.file){
+        if (!this.state.file) {
             alert('Upload an image please!');
             return;
         }
-        const fd=new FormData()
-        fd.append('file',this.state.file,this.state.file.name);
-        formValues={...formValues,userId:this.props.userId,numCourses:howMany};
-        fd.append('data',JSON.stringify(formValues));
+        this.setState({ isButtonDisabled: 1 });
+        const fd = new FormData()
+        fd.append('file', this.state.file, this.state.file.name);
+        formValues = { ...formValues, userId: this.props.userId, numCourses: howMany };
+        fd.append('data', JSON.stringify(formValues));
         console.log('posting');
-        const response=await flask.post('/bookcreate',fd);
+        const response = await flask.post('/bookcreate', fd);
         console.log(response);
+        history.push('/bookexchange');
+        if (!this.didUnmount)
+            this.setState({ isButtonDisabled: 0 });
     }
 
     render() {
         // console.log(this.props);
-        const imgStyle={ maxWidth: '40vw', maxHeight: '70vh' , display:'block',marginLeft:'auto',marginRight:'auto'}
+        const imgStyle = { maxWidth: '40vw', maxHeight: '70vh', display: 'block', marginLeft: 'auto', marginRight: 'auto' }
         return (
             <>
                 <Header />
@@ -142,7 +158,7 @@ class CreateBook extends React.Component {
                         </div>
                     </div>
                     <div className='eight wide column p-5'>
-                        <form className='ui form error' onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                        <form className='ui form error' onSubmit={this.props.handleSubmit(this.onSubmit)} onKeyPress={this.onKeyPress}>
                             <h2 className='ui dividing header'>Book Details</h2>
                             <Field name='BookName' type='text' label="Book Name" component={this.renderInput} />
                             <Field name='BookAuthor' type='text' label="Book Author" component={this.renderInput} />
@@ -155,7 +171,7 @@ class CreateBook extends React.Component {
                                 <i className="plus circle icon large float-end" style={{ cursor: 'pointer' }} onClick={() => this.renderRelevantCourseInput()}></i>
                             </div>
                             {this.state.elem}
-                            <button className='d-block ui button blue'>Submit</button>
+                            <button disabled={this.state.isButtonDisabled} className='d-block ui button blue'>Submit</button>
                         </form>
                     </div>
                 </div>
@@ -173,10 +189,10 @@ const validate = formValues => {
         errors.BookAuthor = "Please enter Book Author";
     if (!formValues.BookType)
         errors.BookType = "Please enter Book Type";
-    if(!formValues.Description)
-        errors.Description="Please enter Description of the book"
-    if(!formValues.Cost)
-        errors.Cost="Please enter cost (0 if you are just lending)"
+    if (!formValues.Description)
+        errors.Description = "Please enter Description of the book"
+    if (!formValues.Cost)
+        errors.Cost = "Please enter cost (0 if you are just lending)"
     for (let i = 1; i <= howMany; i++) {
         if (!formValues[`course_code_${i}`])
             errors[`course_code_${i}`] = "Please enter course code";
@@ -197,8 +213,8 @@ const wrapped = reduxForm({
 })(CreateBook);
 
 
-const mapStateToProps = state =>{
-    return {userId:state.auth.userId};
+const mapStateToProps = state => {
+    return { userId: state.auth.userId };
 };
 
 export default connect(mapStateToProps)(wrapped);
