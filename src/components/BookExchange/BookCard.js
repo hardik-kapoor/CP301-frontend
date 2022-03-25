@@ -13,6 +13,8 @@ const BookCard = props => {
         description = description + "...";
 
     const renderButtons = () => {
+        if(props.userId===null)
+            return null;
         if (props.showButton)
             return (<button className="btn btn-danger align-self-end btn-block" style={{ width: '5vw', marginTop: 'auto' }} onClick={() => removeBook(props.id)}>Remove</button>);
         else{
@@ -59,7 +61,7 @@ const BookCard = props => {
         //         </div>
         //     </div>
         // </div>
-        <div className="card my-1">
+        <div className="card my-1" style={{height:'35vh'}}>
             <div className="card-body d-inline-flex">
                 <img src={props.imgSource} alt={props.imgAlt} style={imgStyle} className="p-2 card-img-top" />
                 <div className='bookcard-details'>

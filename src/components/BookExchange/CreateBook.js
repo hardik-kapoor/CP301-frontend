@@ -14,6 +14,7 @@ class CreateBook extends React.Component {
     constructor(props) {
         super(props);
         this.didUnmount = false;
+        howMany=0;
     }
 
     bookTypeOptions = [
@@ -186,6 +187,7 @@ class CreateBook extends React.Component {
 
 const validate = formValues => {
     const errors = {};
+    console.log(howMany);
     // console.log(formValues);
     if (!formValues.BookName)
         errors.BookName = "Please enter Book Name";
