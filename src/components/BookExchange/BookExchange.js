@@ -5,6 +5,7 @@ import Header from "../Header";
 import LoadingScreen from 'react-loading-screen';
 import flask from "../../apis/flask";
 import BookRender from "./BookRender";
+import Filter from "./Filter";
 
 class BookExchange extends React.Component {
     state = { books: [], showLoadingScreen: true, temp: Math.random() };
@@ -35,10 +36,10 @@ class BookExchange extends React.Component {
             <>
                 <Header dropdown={true} />
                 <div className="ui two column grid" style={{ margin: '0px' }}>
-                    <div className="three wide column">
-                        Hello
+                    <div className="four wide column">
+                        <Filter />
                     </div>
-                    <div className="thirteen wide column">
+                    <div className="twelve wide column">
                         <BookRender books={this.state.books} userId={this.props.userId} rerender={this.rerender} showButton2={true}/>
                     </div>
                 </div>
