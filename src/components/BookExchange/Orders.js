@@ -20,7 +20,7 @@ const Orders = props => {
             setShowLoading(false);
         }
         getFromFlask();
-    }, [])
+    }, [props.userId])
 
     const render = () => {
         if (books === [])

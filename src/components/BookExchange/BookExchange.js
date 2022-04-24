@@ -11,7 +11,7 @@ class BookExchange extends React.Component {
     state = { books: [], showLoadingScreen: true, temp: Math.random() };
     componentDidMount() {
         const getFromFlask = async () => {
-            const response = await flask.get(this.props.location.pathname);
+            const response = await flask.get(this.props.location.pathname+this.props.location.search);
             this.setState({ books: response.data, showLoadingScreen: false });
         }
         getFromFlask();

@@ -39,7 +39,6 @@ const BookCard = props => {
     };
 
     const removeBook = async id => {
-        // console.log('hello');
         const ans = window.confirm("Are you sure you want to delete?");
         if (ans) {
             const response = await flask.delete(`/bookdelete/${id}`)
@@ -49,18 +48,6 @@ const BookCard = props => {
     };
 
     return (
-        // <div className="column">
-        //     <div className="ui segment" style={{backgroundColor:''}}>
-        //         <div>
-        //             <div className="imageHead image header">
-        //                 <img src={props.imgSource} alt={props.imgAlt}></img>
-        //             </div>
-        //             <div className="contentHead ui header">
-        //                 {props.header}
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
         <div className="card my-1" style={{height:'35vh'}}>
             <div className="card-body d-inline-flex">
                 <img src={props.imgSource} alt={props.imgAlt} style={imgStyle} className="p-2 card-img-top" />
@@ -72,16 +59,6 @@ const BookCard = props => {
                 </div>
             </div>
         </div>
-        // <div className='bookcard'>
-        //     <img src={props.imgSource} alt={props.imgAlt} style={imgStyle} className="p-2" />
-        //     <div className='bookcard-details'>
-        //         <Link to={`/bookexchange/${props.id}`} style={{ textDecoration: 'none' }} ><h1>{props.bookTitle}</h1></Link>
-        //         <h2>by <span style={{ color: 'black !important' }}>{props.authorName}</span> | {cost}</h2>
-        //         <p style={{ color: 'black !important' }}>{props.description}</p>
-        //         <button className="btn btn-primary align-self-end btn-block mx-2" style={{ marginTop: 'auto' }}>Get</button>
-        //         {renderButtons()}
-        //     </div>
-        // </div>
     );
 };
 
