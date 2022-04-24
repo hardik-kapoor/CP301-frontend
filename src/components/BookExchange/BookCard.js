@@ -16,34 +16,12 @@ const BookCard = props => {
         if(props.userId===null)
             return null;
         if (props.showButton)
-            return (<button className="btn btn-danger align-self-end btn-block" style={{ width: '5vw', marginTop: 'auto' }} onClick={() => removeBook(props.id)}>Remove</button>);
+            return (<button className="btn btn-danger align-self-end btn-block" style={{ width: '5vw', marginTop: 'auto' }} onClick={() => props.funButton(props.id)}>Remove</button>);
         else{
             if(props.showButton2)
-                return (<button className="btn btn-primary align-self-end btn-block" style={{ width: '5vw', marginRight: '10px' }} onClick={() => getBook(props.id)}>Get</button>);
+                return (<button className="btn btn-primary align-self-end btn-block" style={{ width: '5vw', marginRight: '10px' }} onClick={() => props.funButton2(props.id)}>Get</button>);
             else
                 return null;
-        }
-    };
-
-    const getBook = async id => {
-        const ans = window.confirm("Are you sure you want to add this book?");
-        if (ans) {
-            const response = await flask.post('/getbook', {}, {
-                params: {
-                    user: props.userId,
-                    book: props.id
-                }
-            });
-            console.log(response);
-        }
-    };
-
-    const removeBook = async id => {
-        const ans = window.confirm("Are you sure you want to delete?");
-        if (ans) {
-            const response = await flask.delete(`/bookdelete/${id}`)
-            props.rerender();
-            console.log(response);
         }
     };
 

@@ -21,6 +21,26 @@ class BookExchange extends React.Component {
         window.location.reload(true);
     }
 
+    getBook = async id => {
+        const ans = window.confirm("Are you sure you want to add this book?");
+        if (ans) {
+            const response = await flask.post('/getbook', {}, {
+                params: {
+                    user: this.props.userId,
+                    book: this.props.id
+                }
+            });
+        }
+    };
+
+    removeBook = async id => {
+        const ans = window.confirm("Are you sure you want to delete?");
+        if (ans) {
+            const response = await flask.delete(`/bookdelete/${id}`)
+            this.rerender();
+        }
+    };
+
     render() {
         if (this.state.showLoadingScreen) {
             return (
@@ -40,7 +60,12 @@ class BookExchange extends React.Component {
                         <Filter />
                     </div>
                     <div className="twelve wide column">
-                        <BookRender books={this.state.books} userId={this.props.userId} rerender={this.rerender} showButton2={true}/>
+                        <BookRender books={this.state.books} 
+                                    userId={this.props.userId} 
+                                    showButton2={true} 
+                                    funButton2={this.getBook}
+                                    funButton={this.removeBook}
+                                    />
                     </div>
                 </div>
             </>

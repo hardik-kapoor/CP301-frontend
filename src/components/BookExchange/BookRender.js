@@ -19,9 +19,10 @@ const BookRender = props =>{
                             id={book.book_id}
                             cost={book.book_cost}
                             userId={props.userId}
-                            rerender={props.rerender}
                             showButton={showButtons}
+                            funButton={props.funButton}
                             showButton2={props.showButton2}
+                            funButton2={props.funButton2}
                         />
                     </div>
                 );
