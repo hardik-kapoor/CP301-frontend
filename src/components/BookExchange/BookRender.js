@@ -19,7 +19,7 @@ const BookRender = props =>{
                             id={book.book_id}
                             cost={book.book_cost}
                             userId={props.userId}
-                            showButton={showButtons}
+                            showButton={showButtons || props.showButton}
                             funButton={props.funButton}
                             showButton2={props.showButton2}
                             funButton2={props.funButton2}

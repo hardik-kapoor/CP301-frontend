@@ -22,11 +22,32 @@ const Orders = props => {
         getFromFlask();
     }, [props.userId])
 
+    const rerender = () => {
+        window.location.reload(true);
+    }
+
+    const removeOrder = async id => {
+        const ans = window.confirm("Are you sure you want to delete?");
+        if (ans) {
+            const response = await flask.delete(`/orderdelete`, {
+                params: {
+                    user: props.userId,
+                    bookid: id
+                }
+            });
+            rerender();
+        }
+    };
+
     const render = () => {
         if (books === [])
             return <div className='display-1 mx-auto'></div>
         else
-            return <BookRender books={books} userId={props.userId} showButton2={false} />;
+            return <BookRender books={books}
+                userId={props.userId}
+                showButton={true}
+                funButton={removeOrder}
+            />;
     };
 
     if (showLoading) {

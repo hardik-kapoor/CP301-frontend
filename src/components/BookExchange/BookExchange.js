@@ -27,7 +27,7 @@ class BookExchange extends React.Component {
             const response = await flask.post('/getbook', {}, {
                 params: {
                     user: this.props.userId,
-                    book: this.props.id
+                    book: id
                 }
             });
         }

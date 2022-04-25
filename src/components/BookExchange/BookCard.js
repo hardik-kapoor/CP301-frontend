@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import '../styles/BookCard.css';
-import flask from "../../apis/flask";
 
 const BookCard = props => {
     const cost = props.cost == 0 ? "Free" : "Rs. " + props.cost;
