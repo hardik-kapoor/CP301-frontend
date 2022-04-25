@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Header from '../Header';
 import flask from '../../apis/flask';
 import { connect } from 'react-redux';
-import BookRender from './BookRender';
 import LoadingScreen from 'react-loading-screen';
+import LendBookRender from './LendBookRender';
 
 const Lend = props => {
     const [books, setBooks] = useState([]);
@@ -16,6 +16,7 @@ const Lend = props => {
                     user: props.userId
                 }
             });
+            console.log(response.data);
             setBooks(response.data);
             setShowLoading(false);
         }
@@ -26,7 +27,10 @@ const Lend = props => {
         if (books === [])
             return <div className='display-1 mx-auto'></div>
         else
-            return <BookRender books={books} userId={props.userId} showButton2={false} />;
+            return <LendBookRender books={books} 
+                               userId={props.userId} 
+                               showButton2={false} 
+                    />;
     };
 
     if (showLoading) {
