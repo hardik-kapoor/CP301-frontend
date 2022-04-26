@@ -23,13 +23,27 @@ const Lend = props => {
         getFromFlask();
     }, [])
 
+    const sold = async (sellToid,bookId,userName) => {
+        if(sellToid===null)
+        {
+            alert('Nobody selected to sell to!');
+            return;
+        }
+        const ans=window.confirm(`Are you sure you want to sell to ${userName}`);
+        if(ans)
+        {
+            const response = await flask.patch(`/orderConfirm/${sellToid}/${props.userId}/${bookId}`);
+            window.location.reload(true);
+        }
+    };
+
     const render = () => {
         if (books === [])
             return <div className='display-1 mx-auto'></div>
         else
             return <LendBookRender books={books} 
-                               userId={props.userId} 
-                               showButton2={false} 
+                               userId={props.userId}
+                               sold={sold}
                     />;
     };
 

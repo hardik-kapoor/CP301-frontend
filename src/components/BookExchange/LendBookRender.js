@@ -19,6 +19,8 @@ const LendBookRender = props =>{
                             cost={book.book_cost}
                             userId={props.userId}
                             Orders={book.Orders}
+                            status={book.status}
+                            sold={props.sold}
                         />
                     </div>
                 );

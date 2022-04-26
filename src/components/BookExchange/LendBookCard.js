@@ -4,7 +4,7 @@ import '../styles/BookCard.css';
 import Select from 'react-select';
 
 const LendBookCard = props => {
-    const cost = props.cost == 0 ? "Free" : "Rs. " + props.cost;
+    const cost = props.cost === 0 ? "Free" : "Rs. " + props.cost;
     const imgStyle = { maxWidth: '10vw', maxHeight: '50vh' }
     const len = props.description.length < 100 ? props.description.length : 100;
     const flag = props.description.length < 100 ? false : true;
@@ -12,30 +12,39 @@ const LendBookCard = props => {
     if (flag)
         description = description + "...";
 
-    const [sellTo,setSellTo]=useState(null);
+    const [sellTo, setSellTo] = useState(null);
 
-    const createOptions = orders =>{
-        const options=[];
-        orders.map(order=>{
-            options.push({value:order.user_id,label:`Username: ${order.username} | Email Id: ${order.email_id}`});
+    const createOptions = orders => {
+        const options = [];
+        orders.map(order => {
+            options.push({ value: { id: order.user_id, username: order.username }, label: `Username: ${order.username} | Email Id: ${order.email_id}` });
         });
         return options;
     };
 
     const renderDropdown = () => {
-        const options=createOptions(props.Orders)
-        return (
-            <div className="field w-75">
-                <div className="font-weight-bold">Sell To</div>
-                <div className="">
-                <Select
-                    onChange={value => setSellTo(value)}
-                    isClearable={true}
-                    options={options}
-                />
+        const options = createOptions(props.Orders);
+        if(props.status=='NOT_SOLD'){
+            return (
+                <div className="field w-75">
+                    <div className="font-weight-bold">Sell To</div>
+                    <Select
+                        options={options}
+                        onChange={value => setSellTo(value)}
+                        isClearable={true}
+                    />
+                    <div className="mt-2">
+                        <button className="btn btn-primary align-self-end btn-block"
+                            onClick={() => props.sold(sellTo.value.id, props.id, sellTo.value.username)}>Sell</button>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+        else{
+            return (
+                <div className="text-success h3">SOLD!</div>
+            );
+        }
     };
 
     return (
