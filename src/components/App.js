@@ -11,6 +11,7 @@ import PrivateRoute from './PrivateRoute';
 import BookDetails from './BookExchange/BookDetails';
 import Orders from './BookExchange/Orders';
 import Lend from './BookExchange/Lend';
+import Account from '../Account';
 
 const App = () => {
     return (
@@ -34,6 +35,9 @@ const App = () => {
                     </PrivateRoute>
                     <PrivateRoute exact path="/bookexchange/tolend">
                         <Lend/>
+                    </PrivateRoute>
+                    <PrivateRoute exact path="/account">
+                        <Account/>
                     </PrivateRoute>
                     <Route exact path="/bookexchange">
                         <BookExchange />

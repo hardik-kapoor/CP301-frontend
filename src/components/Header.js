@@ -20,8 +20,14 @@ const Header = props => {
         };
     }, []);
     const renderButtons = () => {
-        if (props.isSignedIn)
-            return <SignOut />;
+        if (props.isSignedIn){
+            return (
+                <>
+                    <Link to='/account' className="ui inverted button" style={{ marginRight: '5px' }}>Account</Link>
+                    <SignOut />
+                </>
+            );
+        }
         else {
             return (
                 <>
