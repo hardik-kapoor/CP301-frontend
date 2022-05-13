@@ -35,7 +35,7 @@ const App = () => {
                     <PrivateRoute exact path="/bookexchange/tolend">
                         <Lend/>
                     </PrivateRoute>
-                    <Route path="/bookexchange">
+                    <Route exact path="/bookexchange">
                         <BookExchange />
                     </Route>
                     <Route exact path="/bookexchange/:id">

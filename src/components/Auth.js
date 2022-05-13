@@ -120,22 +120,22 @@ const validate = formValues => {
     const errors = {};
     if (type === 'Sign Up') {
         if (!formValues.username)
-            errors.username = "Input a username";
+        errors.username = "Input a username";
         else if (formValues.username.length > 30)
-            errors.username = "Username must be atmost 30 characters"
+        errors.username = "Username must be atmost 30 characters"
     }
     if (!formValues.email_id)
-        errors.email_id = "Input an Email Id";
+    errors.email_id = "Input an Email Id";
     else if (!ValidateEmail(formValues.email_id))
-        errors.email_id = "Input a valid Email Id";
+    errors.email_id = "Input a valid Email Id";
     if (!formValues.password)
-        errors.password = "Input a password";
+    errors.password = "Input a password";
     if (type === 'Sign Up') {
         if (!formValues.re_enter_password)
-            errors.re_enter_password = "Re Enter password";
+        errors.re_enter_password = "Re Enter password";
         if (formValues.password && formValues.re_enter_password && formValues.password !== formValues.re_enter_password)
             errors.re_enter_password = "Passwords do not Match!"
-    }
+        }
     return errors;
 };
 
