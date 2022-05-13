@@ -14,13 +14,11 @@ class CreateAccountDetails extends React.Component {
     onSubmit = async (formValues) => {
         this.setState({ isButtonDisabled: 1 });
         formValues = { ...formValues, user_id: this.props.userId };
-        console.log(formValues);
         const fd=new FormData();
         fd.append('data', JSON.stringify(formValues));
         const response = await flask.post('/accountdetailspost', fd);
-        console.log(response);
         this.setState({ isButtonDisabled: 0 });
-        history.push('/account');
+        history.push('/');
     };
 
     onKeyPress = (event) => {

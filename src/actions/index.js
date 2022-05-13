@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT } from './types';
+import { SIGN_IN, SIGN_OUT, ACCOUNT_TYPE } from './types';
 import history from '../history';
 import flask from '../apis/flask';
 
@@ -14,7 +14,7 @@ export const signIn = formVal => async (dispatch) => {
             alert('There is some error, please try again later.');
         return;
     }
-    localStorage.setItem('user',response.data.userId);
+    localStorage.setItem('user', response.data.userId);
     dispatch({ type: SIGN_IN, payload: response.data.userId });
 };
 
@@ -30,7 +30,7 @@ export const signUp = formVal => async (dispatch) => {
             alert('There is some error, please try again later.');
         return;
     }
-    localStorage.setItem('user',response.data.userId);
+    localStorage.setItem('user', response.data.userId);
     dispatch({ type: SIGN_IN, payload: response.data.userId });
 };
 
@@ -42,6 +42,18 @@ export const signOut = () => {
     };
 };
 
-export const getBooks = bookid => async(dispatch) => {
-    
+export const accountType = userId => async (dispatch) => {
+    let chk = false;
+    if (userId) {
+        const response = await flask.get('/accounts', {
+            params: {
+                user_id: userId
+            }
+        })
+        if (response.data === 'none')
+            chk = false;
+        else
+            chk = true;
+    }
+    dispatch({ type: ACCOUNT_TYPE, payload: chk });
 };

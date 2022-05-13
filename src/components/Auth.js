@@ -4,7 +4,7 @@ import Header from './Header';
 import { withRouter } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { signUp, signIn } from '../actions';
+import { signUp, signIn, accountType } from '../actions';
 // import Swal from 'sweetalert2';
 import { ValidateEmail } from '../helperFunctions/SignUp';
 import './styles/SignUp.css';
@@ -19,8 +19,8 @@ class Auth extends React.Component {
         type = this.props.type;
     }
 
-    componentDidMount(){
-        if(!this.props.location.state)
+    componentDidMount() {
+        if (!this.props.location.state)
             return;
         // await Swal.fire({
         //         text: 'You need to login to Access this page',
@@ -62,6 +62,7 @@ class Auth extends React.Component {
             await this.props.signIn(formValues);
         else
             await this.props.signUp(formValues);
+        await this.props.accountType(this.props.userid);
         if (this.props.isSignedIn === true)
             this.setState({ redirect: true });
         if (!this.didUnmount)
@@ -70,9 +71,9 @@ class Auth extends React.Component {
 
     onKeyPress = (event) => {
         if (event.key === 'Enter') {
-          event.preventDefault(); //<===== This stops the form from being submitted
+            event.preventDefault(); //<===== This stops the form from being submitted
         }
-      }
+    }
 
     renderFields = () => {
         if (this.props.type === 'Log In') {
@@ -120,22 +121,22 @@ const validate = formValues => {
     const errors = {};
     if (type === 'Sign Up') {
         if (!formValues.username)
-        errors.username = "Input a username";
+            errors.username = "Input a username";
         else if (formValues.username.length > 30)
-        errors.username = "Username must be atmost 30 characters"
+            errors.username = "Username must be atmost 30 characters"
     }
     if (!formValues.email_id)
-    errors.email_id = "Input an Email Id";
+        errors.email_id = "Input an Email Id";
     else if (!ValidateEmail(formValues.email_id))
-    errors.email_id = "Input a valid Email Id";
+        errors.email_id = "Input a valid Email Id";
     if (!formValues.password)
-    errors.password = "Input a password";
+        errors.password = "Input a password";
     if (type === 'Sign Up') {
         if (!formValues.re_enter_password)
-        errors.re_enter_password = "Re Enter password";
+            errors.re_enter_password = "Re Enter password";
         if (formValues.password && formValues.re_enter_password && formValues.password !== formValues.re_enter_password)
             errors.re_enter_password = "Passwords do not Match!"
-        }
+    }
     return errors;
 };
 
@@ -145,7 +146,7 @@ const formWrapped = reduxForm({
 })(Auth);
 
 const mapStateToProps = (state) => {
-    return { isSignedIn: state.auth.isSignedIn };
+    return { isSignedIn: state.auth.isSignedIn, userid: state.auth.userId };
 };
 
-export default connect(mapStateToProps, { signUp, signIn })(withRouter(formWrapped));
+export default connect(mapStateToProps, { signUp, signIn ,accountType })(withRouter(formWrapped));
