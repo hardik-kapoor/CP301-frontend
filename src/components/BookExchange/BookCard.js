@@ -12,6 +12,11 @@ const BookCard = props => {
         description = description + "...";
 
     const renderButtons = () => {
+        if(props.book.status!=='NOT_SOLD'){
+            return (
+                <div className="text-success h3">SOLD!</div>
+            );
+        }
         if(props.userId===null)
             return null;
         if (props.showButton)
