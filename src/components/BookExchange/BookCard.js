@@ -24,6 +24,19 @@ const BookCard = props => {
         }
     };
 
+
+    const renderInfo = () =>{
+        if(props.book.status==='NOT_CHECKED')
+            return null;
+        if(props.book.status==='REJECTED')
+            return <div className="">REJECTED!</div>
+        else
+            return (<div className="">
+                        <div className="h-3 font-weight-bold">ACCEPTED!</div>
+                        <p className="h-5 font-weight-bold">{`Collect from ${props.book.name} from ${props.book.hostel_name} , ${props.book.room_no}, phone number: ${props.book.phone_no}`}</p>
+                    </div>);
+    };
+
     return (
         <div className="card my-1" style={{height:'35vh'}}>
             <div className="card-body d-inline-flex">
@@ -33,6 +46,7 @@ const BookCard = props => {
                     <h5>by <span style={{ color: 'black !important' }}>{props.authorName}</span> | {cost}</h5>
                     <p style={{ color: 'black !important' }}>{description}</p>
                     {renderButtons()}
+                    {renderInfo()}
                 </div>
             </div>
         </div>
