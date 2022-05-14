@@ -14,10 +14,12 @@ import Lend from './BookExchange/Lend';
 import './styles/App.css'
 import CardSlider from './ImageSlider';
 import { bgUrl } from '../imageUrl';
+import Account from '../Account';
+// import './styles/App.scss';
 
 const App = () => {
     return (
-        <>
+        <div className="root">
             <Helmet>
                 {/* <style>{'body {background-color:#EEEEEE}'}</style> */}
             </Helmet>
@@ -26,7 +28,7 @@ const App = () => {
                     <Route exact path="/">
                         <div className="main-div">
                             <Header />
-                            <h1 className="title">Student Welfare Portal</h1>
+                            <h1 className="cut-text">Student Welfare Portal</h1>
                             <div className="sub-div">
                                 <img src={bgUrl} className='bgImg'/>
                                 <CardSlider />
@@ -54,9 +56,12 @@ const App = () => {
                     <Route exact path='/login'>
                         <Auth type='Log In' />
                     </Route>
+                    <Route exact path='/account'>
+                        <Account/>
+                    </Route>
                 </Switch>
             </Router>
-        </>
+        </div>
     );
 };
 

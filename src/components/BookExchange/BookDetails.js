@@ -15,23 +15,30 @@ const BookDetails = props => {
         getFromFlask();
     },[]);
 
+    console.log(book);
+
     const imgStyle={ maxWidth: '40vw', maxHeight: '70vh' , display:'block',marginLeft:'auto',marginRight:'auto'}
 
-    return (<>
-            <Header dropdown={true}/>
-            <div className="ui two column grid">
-                    <div className='six wide column'>
-                        <div className='ui container'>
-                            <img alt='' className="img-fluid rounded px-5 pt-5 pb-3" style={imgStyle} src={book.image_link} />
-                        </div>
-                    </div>
-                    <div className="eight wide column">
-                        <div className="ui header">
+    // return (<>
+    //         <Header dropdown={true}/>
+    //         <div className="ui two column grid">
+    //                 <div className='six wide column'>
+    //                     <div className='ui container'>
+    //                         <img alt='' className="img-fluid rounded px-5 pt-5 pb-3" style={imgStyle} src={book.image_link} />
+    //                     </div>
+    //                 </div>
+    //                 <div className="eight wide column">
+    //                     <div className="ui header">
                             
-                        </div>
-                    </div>
-            </div>
-        </>);
+    //                     </div>
+    //                 </div>
+    //         </div>
+    //     </>);
+    return (
+        <div>
+            Something 
+        </div>
+    )
 };
 
 export default connect(null)(withRouter(BookDetails));

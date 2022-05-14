@@ -57,7 +57,7 @@ class CreateAccountDetails extends React.Component {
 
     renderFields = () => {
         return (
-            <div className='constainer'>
+            <div className='container'>
                 <Field name="name" type='text' label="Name" component={this.renderInput} width={100}></Field>
                 <Field name="roll_no" type='text' label="Roll Number" component={this.renderInput} width={100}></Field>
                 <div className='row'>

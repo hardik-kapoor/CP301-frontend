@@ -1,5 +1,7 @@
 import React from 'react';
 import BookCard from './BookCard';
+import '../styles/BookRender.css';
+
 
 const BookRender = props => {
     console.log(props);
@@ -14,7 +16,7 @@ const BookRender = props => {
                 console.log(showButtons);
                 console.log(book.status);
                 return (
-                    <div className="col-sm-6" key={book.book_id}>
+                    <div className="book_cards col-sm-6" key={book.book_id}>
                         <BookCard imgSource={book.image_link}
                             bookTitle={book.book_name}
                             authorName={book.book_author}

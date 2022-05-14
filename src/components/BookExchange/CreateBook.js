@@ -149,7 +149,7 @@ class CreateBook extends React.Component {
         // console.log(this.props);
         const imgStyle = { maxWidth: '40vw', maxHeight: '70vh', display: 'block', marginLeft: 'auto', marginRight: 'auto' }
         return (
-            <>
+            <div className="newbook">
                 <Header />
                 <div className='ui two column grid'>
                     <div className='seven wide column'>
@@ -180,7 +180,7 @@ class CreateBook extends React.Component {
                         </form>
                     </div>
                 </div>
-            </>
+            </div>
         );
     }
 };

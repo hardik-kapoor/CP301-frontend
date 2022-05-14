@@ -102,7 +102,7 @@ class Auth extends React.Component {
         if (this.state.redirect)
             return <Redirect to={this.props.location.state?.from || '/'} />;
         return (
-            <>
+            <div className="auth">
                 <Header />
                 <div className='center'>
                     <h2 style={{ textAlign: 'center' }}>{this.props.type}</h2>
@@ -112,7 +112,7 @@ class Auth extends React.Component {
                         <button disabled={this.state.isButtonDisabled} className='ui primary button'>Submit</button>
                     </form>
                 </div>
-            </>
+            </div>
         );
     }
 };

@@ -21,6 +21,7 @@ const Account = props => {
             else {
                 setisId(true);
                 setdata(response.data);
+                console.log(data);
             }
             await props.accountType(props.userId);
         };
@@ -31,6 +32,7 @@ const Account = props => {
     const retData = () => {
         if (isId === null)
             return <p>Null</p>;
+            // return <CreateAccountDetails />;
         else if (isId === false)
             return <CreateAccountDetails />;
         else
@@ -38,10 +40,10 @@ const Account = props => {
     };
 
     return (
-        <>
+        <div className="account">
             <Header />
             {retData()};
-        </>
+        </div>
     );
 };
 

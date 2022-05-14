@@ -6,7 +6,7 @@ const Card = props => {
     return (
         <div className="column">
             <Link to={props.link}>
-                <div className="ui segment">
+                <div className="outer ui segment">
                     <div>
                         <div className="imageHead image header">
                             <img src={props.imgSource} alt={props.imgAlt}></img>
