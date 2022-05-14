@@ -11,20 +11,26 @@ import PrivateRoute from './PrivateRoute';
 import BookDetails from './BookExchange/BookDetails';
 import Orders from './BookExchange/Orders';
 import Lend from './BookExchange/Lend';
-import Account from '../Account';
+import './styles/App.css'
+import CardSlider from './ImageSlider';
+import { bgUrl } from '../imageUrl';
 
 const App = () => {
     return (
         <>
             <Helmet>
-                <style>{'body {background-color:#EEEEEE}'}</style>
+                {/* <style>{'body {background-color:#EEEEEE}'}</style> */}
             </Helmet>
             <Router history={history}>
                 <Switch>
                     <Route exact path="/">
-                        <div>
+                        <div className="main-div">
                             <Header />
-                            <CardHolder />
+                            <h1 className="title">Student Welfare Portal</h1>
+                            <div className="sub-div">
+                                <img src={bgUrl} className='bgImg'/>
+                                <CardSlider />
+                            </div>
                         </div>
                     </Route>
                     <PrivateRoute exact path="/bookexchange/newbook">
@@ -36,10 +42,7 @@ const App = () => {
                     <PrivateRoute exact path="/bookexchange/tolend">
                         <Lend/>
                     </PrivateRoute>
-                    <PrivateRoute exact path="/account">
-                        <Account/>
-                    </PrivateRoute>
-                    <Route exact path="/bookexchange">
+                    <Route path="/bookexchange">
                         <BookExchange />
                     </Route>
                     <Route exact path="/bookexchange/:id">
